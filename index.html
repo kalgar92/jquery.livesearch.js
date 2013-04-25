@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="livesearch, live, search, jquery, plugin, demo" />
+	<title>LiveSearch plugin demo</title>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<!--[if IE]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<style type²="text/css">
+
+		a {
+			color:black;
+			text-decoration: none;
+		}
+		h1 {
+			text-align: center;
+			font-family: 'Raleway', sans-serif;
+			font-size: 2.4em;
+		}
+
+		#search {
+			width:380px;
+			padding:8px;
+			display: block;
+			margin: auto;
+			margin-bottom: 36px;
+		}
+
+		#searchHolder * {
+			width: 380px;
+			height: 120px;
+			display: block;
+			padding: 12px;
+			margin-right: 18px; margin-bottom: 18px;
+			border: 1px solid rgb(170, 170, 170);
+			box-shadow: 0px 0px 8px rgb(170, 170, 170);
+			color: rgb(85, 85, 85);
+			float: left;
+			background: none repeat scroll 0% 0% rgb(255, 255, 255);
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<section id="header">
+		<header>
+			<h1><a href="#">LiveSearch plugin Demo</a></h1>
+			<nav>
+				<input id="search" type="text" placeholder="Type something" />
+				<div id="msgBox"></div>
+			</nav>
+		</header>
+	</section>
+	
+	<section id="searchHolder">
+		<article>
+			Il est des entreprises pour lesquelles la vraie méthode est un désordre intentionnel.
+		</article>
+		<article>
+			Il est plus facile de proclamer l'égalité que de la réaliser. 
+		</article>
+		<article>
+			Ce qui m'intéresse, ce n'est pas le bonheur de tous les hommes, c'est celui de chacun.
+		</article>
+		<aside>
+			 C'est la fiction qui permet d'articuler la réalité.
+		</aside>
+		<aside>
+			La réalité dépasse la fiction, car la fiction doit contenir la vraisemblance, mais non pas de la réalité.
+		</aside>
+	</section>
+	
+	<script type="text/javascript">
+
+		(function( $ ) {
+			$.fn.liveSearch = function(formulaire , elementRecherche) {
+
+
+			// Pour le débug
+			if(!formulaire){
+				console.log("Aucun formulaire sur lequel appliquer la recherche")
+			}
+			if(!elementRecherche){
+				console.log("Aucune élément sur lequel appliquer la recherche");
+			}
+
+			// Champ de recherche
+			$(formulaire).keyup(function() {
+
+				// Valeur du champ
+				var recherche = $(this).val();
+				var counter   = 0;
+
+				// Pour chaque ".bonPlan" 
+				$(elementRecherche).children().each(function() {
+
+					// Si on trouve si on ne trouve pas "recherche" on affiche rien
+					if ($(this).text().search(new RegExp(recherche, "i")) < 0) {
+						$(this).fadeOut();
+					} else {
+						counter++;
+						$(this).show();
+					}
+				});
+			
+			});
+
+
+			};
+		})( jQuery );
+
+		$(document).ready(function($) {
+			$("#search").liveSearch("#search", "#searchHolder");
+		});
+
+
+	</script>
+</body>
+</html>
